@@ -34,13 +34,17 @@
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --rad: 10px;
   --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+  --edge: inset 0 1px 0 rgba(255, 255, 255, 0.045);
+  --lift: 0 16px 36px -22px rgba(0, 0, 0, 0.85);
+  --glow-amber: 0 0 22px rgba(224, 166, 78, 0.28);
 }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 body {
   background:
-    radial-gradient(1100px 500px at 85% -10%, rgba(224, 166, 78, 0.05), transparent 60%),
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.022) 1px, transparent 1.5px) 0 0 / 23px 23px,
+    radial-gradient(1100px 500px at 85% -10%, rgba(224, 166, 78, 0.06), transparent 60%),
     radial-gradient(900px 600px at -10% 110%, rgba(111, 155, 221, 0.05), transparent 55%),
     var(--bg);
   color: var(--text);
@@ -60,7 +64,7 @@ a:hover { text-decoration: underline; }
 /* ---------- sidebar ---------- */
 #sidebar {
   border-right: 1px solid var(--line);
-  background: var(--bg2);
+  background: linear-gradient(180deg, var(--bg2), var(--bg) 70%);
   padding: 18px 14px 14px;
   position: sticky;
   top: 0;
@@ -77,6 +81,7 @@ a:hover { text-decoration: underline; }
   font-family: var(--mono); font-weight: 700; font-size: 13px;
   display: grid; place-items: center;
   background: linear-gradient(160deg, rgba(224, 166, 78, 0.12), transparent);
+  box-shadow: var(--glow-amber);
 }
 #sidebar h1 {
   margin: 0; font-family: var(--mono); font-size: 15px;
@@ -93,11 +98,12 @@ a:hover { text-decoration: underline; }
 #nav a {
   color: var(--mut); padding: 7px 10px; border-radius: 7px;
   font-size: 13.5px; border: 1px solid transparent;
+  transition: color 0.14s ease, background 0.14s ease, border-color 0.14s ease;
 }
 #nav a:hover { color: var(--text); background: var(--panel); text-decoration: none; }
 #nav a.active {
   color: var(--amber);
-  background: linear-gradient(90deg, rgba(224, 166, 78, 0.1), transparent);
+  background: linear-gradient(90deg, rgba(224, 166, 78, 0.12), transparent);
   border-color: rgba(224, 166, 78, 0.25);
 }
 .side-foot { margin-top: auto; padding: 14px 8px 2px; }
@@ -118,11 +124,13 @@ a:hover { text-decoration: underline; }
 
 /* ---------- generic ---------- */
 .panel {
-  background: var(--panel);
+  background: linear-gradient(180deg, var(--panel2), var(--panel) 64%);
   border: 1px solid var(--line);
   border-radius: var(--rad);
   padding: 16px 18px;
   margin-bottom: 16px;
+  box-shadow: var(--edge), var(--lift);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
 .panel.tight { padding: 12px 14px; }
 .panel h3, .ptitle {
@@ -130,7 +138,13 @@ a:hover { text-decoration: underline; }
   font-family: var(--mono); font-size: 11px; font-weight: 600;
   letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim);
 }
+.panel h3::before, .ptitle::before {
+  content: ""; display: inline-block; width: 5px; height: 5px;
+  border-radius: 1px; background: var(--amber); margin-right: 8px;
+  vertical-align: middle; box-shadow: 0 0 7px rgba(224, 166, 78, 0.6); opacity: 0.72;
+}
 .panel h3 .hint { float: right; letter-spacing: 0; text-transform: none; color: var(--dim); font-weight: 400; }
+.panel h3 .hint::before { display: none; }
 h2.page-title { font-size: 21px; margin: 2px 0 4px; letter-spacing: -0.01em; }
 .page-sub { color: var(--mut); margin: 0 0 18px; max-width: 70ch; }
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -148,18 +162,22 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 14px 0; }
   background: var(--panel2); border: 1px solid var(--line2);
   color: var(--text); border-radius: 8px; padding: 8px 14px;
   font-size: 13.5px; line-height: 1.2;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease, color 0.15s ease;
 }
-.btn:hover { border-color: var(--amber-dim); text-decoration: none; }
+.btn:hover { border-color: var(--amber-dim); text-decoration: none; transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
 .btn.primary { background: var(--amber); border-color: var(--amber); color: var(--amber-ink); font-weight: 700; }
-.btn.primary:hover { filter: brightness(1.08); }
+.btn.primary:hover { filter: brightness(1.08); box-shadow: 0 8px 22px -10px rgba(224, 166, 78, 0.9); }
 .btn.ghost { background: transparent; }
 .btn.danger { color: #f2b8b8; border-color: rgba(217, 99, 99, 0.5); background: rgba(217, 99, 99, 0.08); }
+.btn.danger:hover { border-color: var(--red); }
 .btn.small { padding: 5px 10px; font-size: 12px; }
-.btn:disabled { opacity: 0.45; cursor: default; }
+.btn:disabled { opacity: 0.45; cursor: default; transform: none; }
 
 input[type="text"], input[type="date"], input[type="number"], textarea, select {
   background: var(--bg2); border: 1px solid var(--line2); border-radius: 8px;
   color: var(--text); padding: 8px 10px; width: 100%;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 textarea { resize: vertical; min-height: 70px; }
 input:focus, textarea:focus, select:focus, .btn:focus-visible {
@@ -177,6 +195,7 @@ label.fld > span {
   font-family: var(--mono); font-size: 11px;
   border: 1px solid var(--line2); border-radius: 999px;
   padding: 2px 9px; color: var(--mut); white-space: nowrap;
+  transition: border-color 0.14s ease, color 0.14s ease, background 0.14s ease;
 }
 .chip.amber { color: var(--amber); border-color: rgba(224, 166, 78, 0.4); }
 .chip.teal { color: var(--teal); border-color: rgba(67, 185, 164, 0.4); }
@@ -194,12 +213,42 @@ label.fld > span {
   text-shadow: 0 0 34px rgba(224, 166, 78, 0.25);
   line-height: 1.1;
 }
+/* per-letter axis coloring for the four-letter hero code */
+.typeglyph { display: inline; }
+.typeglyph i { font-style: normal; }
+.typeglyph i.g-ei { color: var(--ax-ei); text-shadow: 0 0 26px rgba(111, 155, 221, 0.45); }
+.typeglyph i.g-sn { color: var(--ax-sn); text-shadow: 0 0 26px rgba(67, 185, 164, 0.45); }
+.typeglyph i.g-tf { color: var(--ax-tf); text-shadow: 0 0 26px rgba(224, 166, 78, 0.45); }
+.typeglyph i.g-jp { color: var(--ax-jp); text-shadow: 0 0 26px rgba(167, 139, 219, 0.45); }
 
 /* ---------- kpis ---------- */
 .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 16px; }
-.kpi { background: var(--panel); border: 1px solid var(--line); border-radius: var(--rad); padding: 12px 14px; }
-.kpi .n { font-family: var(--mono); font-size: 24px; font-weight: 700; color: var(--text); }
+.kpi {
+  position: relative; overflow: hidden;
+  background: linear-gradient(180deg, var(--panel2), var(--panel) 70%);
+  border: 1px solid var(--line); border-radius: var(--rad); padding: 14px 16px;
+  box-shadow: var(--edge), var(--lift);
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+.kpi::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--amber), transparent 78%); opacity: 0.6; }
+.kpi:nth-child(1)::before { background: linear-gradient(90deg, var(--ax-ei), transparent 78%); }
+.kpi:nth-child(2)::before { background: linear-gradient(90deg, var(--ax-sn), transparent 78%); }
+.kpi:nth-child(3)::before { background: linear-gradient(90deg, var(--ax-tf), transparent 78%); }
+.kpi:nth-child(4)::before { background: linear-gradient(90deg, var(--amber), transparent 78%); }
+.kpi:nth-child(5)::before { background: linear-gradient(90deg, var(--ax-jp), transparent 78%); }
+.kpi:hover { transform: translateY(-2px); border-color: var(--line2); }
+.kpi .n { font-family: var(--mono); font-size: 26px; font-weight: 700; color: var(--text); }
+.kpi.flag .n { color: var(--red); }
+.kpi .ic { position: absolute; top: 12px; right: 13px; color: var(--dim); opacity: 0.85; }
+.kpi.flag .ic { color: var(--red); opacity: 1; }
+.kpi.flag::before { background: linear-gradient(90deg, var(--red), transparent 78%); opacity: 0.85; }
 .kpi .l { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); margin-top: 2px; }
+.ic { vertical-align: middle; }
+.act-row { display: flex; gap: 8px; align-items: flex-start; margin: 7px 0; }
+.act-ic { flex: 0 0 auto; color: var(--dim); margin-top: 1px; }
+.act-ic.k-test { color: var(--amber); }
+.act-ic.k-quote { color: var(--ax-tf); }
+.act-ic.k-ev { color: var(--ax-sn); }
 
 /* ---------- axis bars ---------- */
 .axisbar { margin: 10px 0 14px; }
@@ -211,13 +260,13 @@ label.fld > span {
   border: 1px solid var(--line);
 }
 .ab-band { position: absolute; top: 0; bottom: 0; background: rgba(255, 255, 255, 0.07); border-radius: 7px; }
-.ab-mark { position: absolute; top: -3px; width: 4px; height: 20px; border-radius: 2px; transform: translateX(-2px); }
+.ab-mark { position: absolute; top: -3px; width: 4px; height: 20px; border-radius: 2px; transform: translateX(-2px); box-shadow: 0 0 10px currentColor; }
 .ab-mid { position: absolute; left: 50%; top: 2px; bottom: 2px; width: 1px; background: var(--line2); }
 .ab-note { font-size: 11px; color: var(--dim); margin-top: 3px; font-family: var(--mono); }
-.c-ei { color: var(--ax-ei); } .b-ei { background: var(--ax-ei); }
-.c-sn { color: var(--ax-sn); } .b-sn { background: var(--ax-sn); }
-.c-tf { color: var(--ax-tf); } .b-tf { background: var(--ax-tf); }
-.c-jp { color: var(--ax-jp); } .b-jp { background: var(--ax-jp); }
+.c-ei { color: var(--ax-ei); } .b-ei { background: var(--ax-ei); color: var(--ax-ei); }
+.c-sn { color: var(--ax-sn); } .b-sn { background: var(--ax-sn); color: var(--ax-sn); }
+.c-tf { color: var(--ax-tf); } .b-tf { background: var(--ax-tf); color: var(--ax-tf); }
+.c-jp { color: var(--ax-jp); } .b-jp { background: var(--ax-jp); color: var(--ax-jp); }
 
 /* ---------- meters / gauges ---------- */
 .meter { height: 7px; border-radius: 4px; background: var(--bg2); border: 1px solid var(--line); overflow: hidden; }
@@ -230,17 +279,18 @@ label.fld > span {
 .post-row { display: grid; grid-template-columns: 64px 1fr 52px; gap: 10px; align-items: center; margin: 6px 0; }
 .post-row .typecode { font-size: 13px; }
 .post-row .bar { height: 10px; border-radius: 5px; background: var(--bg2); border: 1px solid var(--line); overflow: hidden; }
-.post-row .bar > i { display: block; height: 100%; background: linear-gradient(90deg, var(--amber-dim), var(--amber)); }
+.post-row .bar > i { display: block; height: 100%; background: linear-gradient(90deg, var(--amber-dim), var(--amber)); box-shadow: 0 0 12px rgba(224, 166, 78, 0.35); }
 .post-row .pv { font-family: var(--mono); font-size: 12px; color: var(--mut); text-align: right; }
 
 /* ---------- test runner ---------- */
 .runner { max-width: 760px; margin: 0 auto; }
 .run-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
 .run-prog { flex: 1; }
+.run-prog .meter > i { transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .run-count { font-family: var(--mono); font-size: 12px; color: var(--mut); white-space: nowrap; }
 .qcard {
-  background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
-  padding: 26px 28px; box-shadow: var(--shadow);
+  background: linear-gradient(180deg, var(--panel2), var(--panel) 64%); border: 1px solid var(--line); border-radius: 14px;
+  padding: 26px 28px; box-shadow: var(--edge), var(--shadow);
 }
 .qcat { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); margin-bottom: 10px; }
 .qtext { font-size: 19px; line-height: 1.45; margin-bottom: 20px; font-weight: 550; }
@@ -248,39 +298,49 @@ label.fld > span {
   display: block; width: 100%; text-align: left;
   background: var(--panel2); border: 1px solid var(--line2); border-radius: 10px;
   padding: 13px 15px; margin: 8px 0; font-size: 15px; line-height: 1.4;
+  transition: border-color 0.14s ease, background 0.14s ease, transform 0.1s ease;
 }
-.opt:hover { border-color: var(--amber-dim); background: var(--panel3); }
+.opt:hover { border-color: var(--amber-dim); background: var(--panel3); transform: translateX(3px); }
 .opt.sel { border-color: var(--amber); background: rgba(224, 166, 78, 0.1); }
 .opt .ok { font-family: var(--mono); color: var(--amber); margin-right: 8px; font-weight: 700; }
 .likert { display: grid; grid-template-columns: repeat(5, 1fr); gap: 7px; margin-top: 4px; }
 .likert button {
   background: var(--panel2); border: 1px solid var(--line2); border-radius: 9px;
   padding: 11px 4px; font-size: 11.5px; line-height: 1.25; color: var(--mut);
+  transition: border-color 0.14s ease, color 0.14s ease, background 0.14s ease, transform 0.1s ease;
 }
-.likert button:hover { border-color: var(--amber-dim); color: var(--text); }
+.likert button:hover { border-color: var(--amber-dim); color: var(--text); transform: translateY(-2px); }
 .likert button.sel { border-color: var(--amber); color: var(--amber); background: rgba(224, 166, 78, 0.1); }
 .likert button b { display: block; font-family: var(--mono); font-size: 15px; margin-bottom: 3px; color: var(--text); }
 .likert button.sel b { color: var(--amber); }
+.scale-track { height: 3px; border-radius: 3px; margin: 2px 6px 12px; background: linear-gradient(90deg, var(--ax-ei), var(--line2) 50%, var(--amber)); opacity: 0.45; }
+.lk-lab { display: block; }
+.duel { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: stretch; margin-top: 4px; }
+.duel-or { align-self: center; font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim); }
+.duel-opt { margin: 0; display: flex; flex-direction: column; gap: 8px; }
 .run-foot { display: flex; justify-content: space-between; margin-top: 16px; align-items: center; }
 .kbd-hint { font-family: var(--mono); font-size: 10.5px; color: var(--dim); letter-spacing: 0.04em; }
+.likert-anchors { display: none; }
 
 /* ---------- tabs ---------- */
 .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin-bottom: 16px; flex-wrap: wrap; }
 .tabs button {
   background: transparent; border: 0; border-bottom: 2px solid transparent;
   color: var(--mut); padding: 8px 12px; font-size: 13px; font-family: var(--mono);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.04em; transition: color 0.14s ease, border-color 0.14s ease;
 }
 .tabs button:hover { color: var(--text); }
-.tabs button.active { color: var(--amber); border-bottom-color: var(--amber); }
+.tabs button.active { color: var(--amber); border-bottom-color: var(--amber); text-shadow: 0 0 14px rgba(224, 166, 78, 0.4); }
 
 /* ---------- people list ---------- */
 .person-card {
   display: grid; grid-template-columns: 1fr auto; gap: 6px 14px;
-  background: var(--panel); border: 1px solid var(--line); border-radius: var(--rad);
+  background: linear-gradient(180deg, var(--panel2), var(--panel) 70%); border: 1px solid var(--line); border-radius: var(--rad);
   padding: 13px 16px; margin-bottom: 10px; cursor: pointer;
+  box-shadow: var(--edge);
+  transition: border-color 0.16s ease, transform 0.16s ease, box-shadow 0.16s ease;
 }
-.person-card:hover { border-color: var(--amber-dim); }
+.person-card:hover { border-color: var(--amber-dim); transform: translateY(-2px); box-shadow: var(--edge), var(--lift); }
 .person-card .nm { font-weight: 650; font-size: 15px; }
 .person-card .ctx { color: var(--mut); font-size: 12.5px; }
 
@@ -288,7 +348,9 @@ label.fld > span {
 .ev-item {
   border: 1px solid var(--line); border-left: 3px solid var(--line2);
   border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; background: var(--panel2);
+  transition: border-color 0.14s ease, transform 0.14s ease;
 }
+.ev-item:hover { transform: translateX(2px); }
 .ev-item.dir-pro { border-left-color: var(--teal); }
 .ev-item.dir-con { border-left-color: var(--red); }
 .ev-item .ev-meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 6px; }
@@ -307,7 +369,7 @@ label.fld > span {
   width: 9px; height: 9px; border-radius: 50%;
   background: var(--panel); border: 2px solid var(--dim);
 }
-.tl-item.k-test::before { border-color: var(--amber); }
+.tl-item.k-test::before { border-color: var(--amber); box-shadow: 0 0 9px rgba(224, 166, 78, 0.5); }
 .tl-item.k-quote::before { border-color: var(--ax-tf); }
 .tl-item.k-con::before { border-color: var(--red); }
 .tl-date { font-family: var(--mono); font-size: 10.5px; color: var(--dim); letter-spacing: 0.08em; }
@@ -318,8 +380,9 @@ label.fld > span {
   position: relative; display: block; text-align: center;
   border: 1px solid var(--line); border-radius: 8px; padding: 10px 4px 8px;
   font-family: var(--mono); color: var(--text); font-size: 13px; letter-spacing: 0.08em;
+  transition: border-color 0.14s ease, transform 0.14s ease, background 0.14s ease;
 }
-.tg a:hover { border-color: var(--amber-dim); text-decoration: none; }
+.tg a:hover { border-color: var(--amber); text-decoration: none; transform: translateY(-2px); }
 .tg a .p { display: block; font-size: 10px; color: var(--mut); letter-spacing: 0; margin-top: 2px; }
 .tg a.best { border-color: var(--amber); box-shadow: 0 0 0 1px var(--amber), 0 0 22px rgba(224, 166, 78, 0.2); }
 .tg a.nb::after {
@@ -366,10 +429,12 @@ table.heat td {
 /* ---------- library cards ---------- */
 .lib-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
 .lib-card {
-  display: block; background: var(--panel); border: 1px solid var(--line);
+  display: block; background: linear-gradient(180deg, var(--panel2), var(--panel) 70%); border: 1px solid var(--line);
   border-radius: var(--rad); padding: 14px 16px; color: var(--text);
+  box-shadow: var(--edge);
+  transition: border-color 0.16s ease, transform 0.16s ease, box-shadow 0.16s ease;
 }
-.lib-card:hover { border-color: var(--amber-dim); text-decoration: none; }
+.lib-card:hover { border-color: var(--amber-dim); text-decoration: none; transform: translateY(-2px); box-shadow: var(--edge), var(--lift); }
 .lib-card .ep { color: var(--mut); font-size: 12.5px; margin: 2px 0 6px; }
 .lib-card .core { font-size: 12.5px; color: var(--mut); }
 
@@ -384,6 +449,7 @@ table.heat td {
 .tagbar button {
   font-family: var(--mono); font-size: 10.5px; padding: 2px 8px;
   border-radius: 999px; border: 1px solid var(--line2); background: transparent; color: var(--mut);
+  transition: border-color 0.14s ease, color 0.14s ease, background 0.14s ease;
 }
 .tagbar button:hover { border-color: var(--amber); color: var(--amber); }
 .tagbar button.on { border-color: var(--teal); color: var(--teal); background: rgba(67, 185, 164, 0.1); }
@@ -391,9 +457,10 @@ table.heat td {
 /* ---------- dashboard extras ---------- */
 .alert {
   border: 1px solid rgba(224, 166, 78, 0.4); background: rgba(224, 166, 78, 0.06);
+  border-left: 3px solid var(--amber);
   border-radius: var(--rad); padding: 11px 14px; margin-bottom: 10px; font-size: 13px;
 }
-.alert.red { border-color: rgba(217, 99, 99, 0.45); background: rgba(217, 99, 99, 0.06); }
+.alert.red { border-color: rgba(217, 99, 99, 0.45); border-left-color: var(--red); background: rgba(217, 99, 99, 0.06); }
 .empty {
   border: 1px dashed var(--line2); border-radius: var(--rad);
   padding: 26px 18px; text-align: center; color: var(--dim); font-size: 13px;
@@ -403,6 +470,29 @@ table.heat td {
 .bars .brow .v { font-family: var(--mono); color: var(--dim); text-align: right; font-size: 11px; }
 
 svg text { font-family: var(--mono); }
+
+/* ---------- motion ---------- */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: none; } }
+@keyframes growX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes radarIn { from { opacity: 0; transform: scale(0.55); } to { opacity: 1; transform: scale(1); } }
+@keyframes arcDraw { from { stroke-dashoffset: var(--arc-len, 400); } to { stroke-dashoffset: 0; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+#view > * { animation: fadeUp 0.34s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+#view > *:nth-child(2) { animation-delay: 0.03s; }
+#view > *:nth-child(3) { animation-delay: 0.06s; }
+#view > *:nth-child(4) { animation-delay: 0.09s; }
+#view > *:nth-child(n + 5) { animation-delay: 0.11s; }
+.meter > i, .post-row .bar > i { transform-origin: left center; animation: growX 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.run-prog .meter > i { animation: none; }
+.radar-poly { transform-box: fill-box; transform-origin: 50% 50%; animation: radarIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.gauge-arc { animation: arcDraw 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.gauge-ticks { animation: fadeIn 0.6s ease 0.2s both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, #view > *, .meter > i, .post-row .bar > i, .radar-poly, .gauge-arc, .gauge-ticks {
+    animation: none !important; transition: none !important;
+  }
+}
 
 /* ---------- responsive ---------- */
 @media (max-width: 980px) {
@@ -422,8 +512,12 @@ svg text { font-family: var(--mono); }
   .qcard { padding: 18px 16px; }
   .qtext { font-size: 17px; }
   .likert { grid-template-columns: repeat(5, 1fr); gap: 4px; }
-  .likert button { font-size: 0; padding: 12px 2px; }
+  .likert button { padding: 12px 2px; }
   .likert button b { font-size: 14px; margin: 0; }
+  .lk-lab { display: none; }
+  .likert-anchors { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10.5px; color: var(--dim); margin-top: 7px; letter-spacing: 0.03em; }
+  .duel { grid-template-columns: 1fr; gap: 8px; }
+  .duel-or { padding: 3px 0; }
   .iq .listen { grid-template-columns: 1fr; }
   .post-row { grid-template-columns: 52px 1fr 44px; }
   .contra .vs { grid-template-columns: 1fr; }
@@ -2279,6 +2373,7 @@ svg text { font-family: var(--mono); }
   // js/charts.js
   var AXCLS = { EI: "ei", SN: "sn", TF: "tf", JP: "jp" };
   var AXCOLOR = { EI: "var(--ax-ei)", SN: "var(--ax-sn)", TF: "var(--ax-tf)", JP: "var(--ax-jp)" };
+  var _svgSeq = 0;
   function poleVal(axes, pole, axis) {
     const p = axes[axis]?.pFirst ?? 0.5;
     const isFirst = LETTERS[axis][0] === pole;
@@ -2300,23 +2395,40 @@ svg text { font-family: var(--mono); }
       const a = deg * Math.PI / 180;
       return [c + r * Math.cos(a), c - r * Math.sin(a)];
     };
+    const id = "rdr" + ++_svgSeq;
     let grid = "";
     for (const f of [0.25, 0.5, 0.75, 1]) {
       const pts = order.map(([, , deg]) => pt(deg, R * f).join(",")).join(" ");
-      grid += `<polygon points="${pts}" fill="none" stroke="var(--line)" stroke-width="1"/>`;
+      grid += `<polygon points="${pts}" fill="none" stroke="var(--line)" stroke-width="1" stroke-opacity="${f === 1 ? 1 : 0.55}"/>`;
     }
     let spokes = "", labels = "";
     for (const [pole, axis, deg] of order) {
       const [x2, y2] = pt(deg, R);
       const [lx, ly] = pt(deg, R + 16);
-      spokes += `<line x1="${c}" y1="${c}" x2="${x2}" y2="${y2}" stroke="var(--line)" stroke-width="1"/>`;
+      spokes += `<line x1="${c}" y1="${c}" x2="${x2}" y2="${y2}" stroke="${AXCOLOR[axis]}" stroke-opacity="0.16" stroke-width="1"/>`;
       labels += `<text x="${lx}" y="${ly + 4}" text-anchor="middle" font-size="12" fill="${AXCOLOR[axis]}" font-weight="700">${pole}</text>`;
     }
-    const valPts = order.map(([pole, axis, deg]) => pt(deg, R * Math.max(0.04, poleVal(axes, pole, axis))).join(",")).join(" ");
+    const verts = order.map(([pole, axis, deg]) => pt(deg, R * Math.max(0.04, poleVal(axes, pole, axis))));
+    const valPts = verts.map((p) => p.map((n) => n.toFixed(1)).join(",")).join(" ");
+    const dots = verts.map((p, i) => `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3" fill="${AXCOLOR[order[i][1]]}"/>`).join("");
     return `<svg viewBox="0 0 ${size} ${size}" width="100%" style="max-width:${size + 40}px" role="img" aria-label="Pole signature radar">
+    <defs>
+      <radialGradient id="${id}-f" cx="50%" cy="50%" r="62%">
+        <stop offset="0%" stop-color="rgba(224,166,78,0.42)"/>
+        <stop offset="100%" stop-color="rgba(224,166,78,0.07)"/>
+      </radialGradient>
+      <filter id="${id}-g" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation="3.2" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
     ${grid}${spokes}
-    <polygon points="${valPts}" fill="rgba(224,166,78,0.16)" stroke="var(--amber)" stroke-width="2" stroke-linejoin="round"/>
+    <g class="radar-poly" filter="url(#${id}-g)">
+      <polygon points="${valPts}" fill="url(#${id}-f)" stroke="var(--amber)" stroke-width="2" stroke-linejoin="round"/>
+      ${dots}
+    </g>
     ${labels}
+    <circle cx="${c}" cy="${c}" r="2" fill="var(--amber)" fill-opacity="0.7"/>
   </svg>`;
   }
   function axisBars(axes, { notes = true } = {}) {
@@ -2347,19 +2459,28 @@ svg text { font-family: var(--mono); }
   }
   function gaugeSVG(p01, label = "", sub = "", size = 150) {
     const pctv = Math.round(p01 * 100);
-    const r = size / 2 - 12, c = size / 2;
-    const arc = (from, to, color2, width) => {
+    const r = size / 2 - 14, c = size / 2;
+    const arc = (from, to, color2, width, extra = "") => {
       const a0 = Math.PI * (1 + from), a1 = Math.PI * (1 + to);
       const x0 = c + r * Math.cos(a0), y0 = c + r * Math.sin(a0);
       const x1 = c + r * Math.cos(a1), y1 = c + r * Math.sin(a1);
       const large = to - from > 0.5 ? 1 : 0;
-      return `<path d="M ${x0} ${y0} A ${r} ${r} 0 ${large} 1 ${x1} ${y1}" fill="none" stroke="${color2}" stroke-width="${width}" stroke-linecap="round"/>`;
+      return `<path d="M ${x0} ${y0} A ${r} ${r} 0 ${large} 1 ${x1} ${y1}" fill="none" stroke="${color2}" stroke-width="${width}" stroke-linecap="round" ${extra}/>`;
     };
     const color = p01 >= 0.6 ? "var(--green)" : p01 >= 0.4 ? "var(--amber)" : "var(--red)";
-    return `<div class="gauge-wrap"><svg viewBox="0 0 ${size} ${size * 0.62}" width="${size}">
+    const val = Math.max(0.02, p01);
+    const arcLen = Math.PI * r * val;
+    let ticks = "";
+    for (let i = 0; i <= 10; i++) {
+      const a = Math.PI * (1 + i / 10);
+      const r0 = r + 4, r1 = r + (i % 5 === 0 ? 9 : 7);
+      ticks += `<line x1="${(c + r0 * Math.cos(a)).toFixed(1)}" y1="${(c + r0 * Math.sin(a)).toFixed(1)}" x2="${(c + r1 * Math.cos(a)).toFixed(1)}" y2="${(c + r1 * Math.sin(a)).toFixed(1)}" stroke="var(--line2)" stroke-width="${i % 5 === 0 ? 1.4 : 1}"/>`;
+    }
+    return `<div class="gauge-wrap"><svg viewBox="0 0 ${size} ${(size * 0.66).toFixed(0)}" width="${size}">
+    <g class="gauge-ticks">${ticks}</g>
     ${arc(0, 1, "var(--panel3)", 9)}
-    ${arc(0, Math.max(0.02, p01), color, 9)}
-    <text x="${c}" y="${c - 4}" text-anchor="middle" font-size="22" font-weight="700" fill="var(--text)">${pctv}%</text>
+    ${arc(0, val, color, 9, `class="gauge-arc" style="--arc-len:${arcLen.toFixed(1)};stroke-dasharray:${arcLen.toFixed(1)};filter:drop-shadow(0 0 5px ${color})"`)}
+    <text x="${c}" y="${c - 3}" text-anchor="middle" font-size="22" font-weight="700" fill="var(--text)">${pctv}%</text>
   </svg>
   ${label ? `<div class="mono small" style="letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-size:10px">${esc(label)}</div>` : ""}
   ${sub ? `<div class="small dim">${esc(sub)}</div>` : ""}</div>`;
@@ -2372,6 +2493,23 @@ svg text { font-family: var(--mono); }
       <div class="bar"><i style="width:${Math.max(2, r.prob / max * 100)}%"></i></div>
       <div class="pv">${(r.prob * 100).toFixed(1)}%</div>
     </div>`).join("");
+  }
+  var _GLYPHCLS = ["g-ei", "g-sn", "g-tf", "g-jp"];
+  function typeGlyph(type) {
+    return `<span class="typeglyph">${type.split("").map((L, i) => `<i class="${_GLYPHCLS[i]}">${esc(L)}</i>`).join("")}</span>`;
+  }
+  var ICON_PATHS = {
+    users: '<circle cx="6" cy="6" r="2.3"/><path d="M2 13.5c0-2.3 1.8-3.9 4-3.9s4 1.6 4 3.9"/><path d="M10.6 4.5a1.9 1.9 0 0 1 0 3.7"/><path d="M11.3 9.8c1.7.3 2.7 1.6 2.7 3.7"/>',
+    doc: '<path d="M4 2.5h5l3 3V13a.5.5 0 0 1-.5.5h-7A.5.5 0 0 1 4 13z"/><path d="M9 2.5V5.5h3"/><path d="M6 8.6h4M6 11h4"/>',
+    quote: '<path d="M2.5 3.5h11a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H7.5l-3 3v-3h-2a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1z"/>',
+    pulse: '<path d="M1.5 8.5h3l2-5 3 10 1.8-5h3.2"/>',
+    alert: '<path d="M8 2.2l6.2 11.3H1.8z"/><path d="M8 6.6v3.3"/><path d="M8 11.7h.01"/>'
+  };
+  function icon(name, { size = 14, cls = "" } = {}) {
+    const p = ICON_PATHS[name];
+    if (!p)
+      return "";
+    return `<svg class="ic ${cls}" viewBox="0 0 16 16" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
   }
   function typeGridHTML(posterior, best) {
     const probs = Object.fromEntries((posterior || []).map((r) => [r.type, r.prob]));
@@ -2597,9 +2735,13 @@ svg text { font-family: var(--mono); }
     let body = "";
     if (item.fmt === "likert") {
       const labels = SCALES[item.scale || "agree"];
-      body = `<div class="likert">` + labels.map((lab, i) => `<button data-val="${i}" class="${answers[item.id] === i ? "sel" : ""}"><b>${i + 1}</b>${esc(lab)}</button>`).join("") + `</div>`;
+      body = `<div class="scale"><div class="scale-track"></div><div class="likert">` + labels.map((lab, i) => `<button data-val="${i}" class="${answers[item.id] === i ? "sel" : ""}" title="${esc(lab)}"><b>${i + 1}</b><span class="lk-lab">${esc(lab)}</span></button>`).join("") + `</div><div class="likert-anchors"><span>${esc(labels[0])}</span><span>${esc(labels[labels.length - 1])}</span></div></div>`;
     } else if (item.fmt === "ab") {
-      body = ["a", "b"].map((key) => `<button class="opt ${answers[item.id] === key ? "sel" : ""}" data-val="${key}"><span class="ok">${key.toUpperCase()}</span>${esc(item[key].t)}</button>`).join("");
+      body = `<div class="duel">
+      <button class="opt duel-opt ${answers[item.id] === "a" ? "sel" : ""}" data-val="a"><span class="ok">A</span><span class="opt-t">${esc(item.a.t)}</span></button>
+      <div class="duel-or">or</div>
+      <button class="opt duel-opt ${answers[item.id] === "b" ? "sel" : ""}" data-val="b"><span class="ok">B</span><span class="opt-t">${esc(item.b.t)}</span></button>
+    </div>`;
     } else {
       body = item.opts.map((o, i) => `<button class="opt ${answers[item.id] === i ? "sel" : ""}" data-val="${i}"><span class="ok">${i + 1}</span>${esc(o.t)}</button>`).join("");
     }
@@ -2696,7 +2838,7 @@ svg text { font-family: var(--mono); }
       <div>
         <div class="dim mono small">${r.kind === "deep" ? "DEEP" : "QUICK"} TEST \xB7 ${esc(r.date)} \xB7 subject: ${esc(r.subjectLabel)}${r.proxy ? " \xB7 PROXY" : ""}</div>
         <div class="row" style="gap:14px;align-items:baseline">
-          <span class="bigtype">${r.type}</span>
+          <span class="bigtype">${typeGlyph(r.type)}</span>
           <span class="muted">${esc(prof?.ep || "")}</span>
         </div>
       </div>
@@ -2912,7 +3054,7 @@ svg text { font-family: var(--mono); }
         <div class="panel">
           <h3>Working hypothesis</h3>
           <div class="row" style="gap:14px;align-items:baseline">
-            <span class="bigtype">${comb.type}</span><span class="muted">${esc(TYPES[comb.type]?.ep || "")}</span>
+            <span class="bigtype">${typeGlyph(comb.type)}</span><span class="muted">${esc(TYPES[comb.type]?.ep || "")}</span>
           </div>
           <div style="margin-top:8px">${gaugeSVG(comb.joint, "joint certainty")}</div>
           <div class="small dim" style="margin-top:6px">Sources: ${comb.sources.map((s) => `${esc(s.name)} ${Math.round(s.share * 100)}%`).join(" \xB7 ")}</div>
@@ -3517,6 +3659,7 @@ svg text { font-family: var(--mono); }
     }
     const weak = rows.filter((r) => r.comb.hasData && r.p.status !== "parked").sort((a, b) => a.comb.joint - b.comb.joint).slice(0, 5);
     const contras = rows.flatMap((r) => contradictionsFor(r.p).map((c) => ({ ...c, p: r.p })));
+    const contraIds = new Set(contras.map((c) => c.p.id));
     const recent = rows.flatMap((r) => timelineFor(r.p, r.results).slice(0, 3).map((it) => ({ ...it, p: r.p }))).sort((a, b) => (b.date || "").localeCompare(a.date || "")).slice(0, 7);
     const distCount = {};
     for (const r of typed)
@@ -3526,11 +3669,11 @@ svg text { font-family: var(--mono); }
     root.innerHTML = `
     ${pageHead("The desk")}
     <div class="kpis">
-      <div class="kpi"><div class="n">${counts.people}</div><div class="l">files open</div></div>
-      <div class="kpi"><div class="n">${counts.evidence}</div><div class="l">evidence items</div></div>
-      <div class="kpi"><div class="n">${counts.quotes}</div><div class="l">quotes captured</div></div>
-      <div class="kpi"><div class="n">${counts.results}</div><div class="l">tests run</div></div>
-      <div class="kpi"><div class="n">${contras.length}</div><div class="l">live contradictions</div></div>
+      <div class="kpi">${icon("users", { cls: "c-ei" })}<div class="n">${counts.people}</div><div class="l">files open</div></div>
+      <div class="kpi">${icon("doc", { cls: "c-sn" })}<div class="n">${counts.evidence}</div><div class="l">evidence items</div></div>
+      <div class="kpi">${icon("quote", { cls: "c-tf" })}<div class="n">${counts.quotes}</div><div class="l">quotes captured</div></div>
+      <div class="kpi">${icon("pulse")}<div class="n">${counts.results}</div><div class="l">tests run</div></div>
+      <div class="kpi ${contras.length ? "flag" : ""}">${icon("alert")}<div class="n">${contras.length}</div><div class="l">live contradictions</div></div>
     </div>
 
     <div class="grid2">
@@ -3539,7 +3682,7 @@ svg text { font-family: var(--mono); }
       const ax = AXES.slice().sort((x, y) => r.comb.axes[x].pLetter - r.comb.axes[y].pLetter)[0];
       return `<div class="spread" style="margin:8px 0;border-bottom:1px solid var(--line);padding-bottom:8px">
             <div><a href="#/person/${r.p.id}"><b>${esc(r.p.name)}</b></a>
-              <span class="typecode" style="margin-left:6px">${r.comb.type}</span>
+              <span class="typecode" style="margin-left:6px">${r.comb.type}</span>${contraIds.has(r.p.id) ? ` <span class="chip red" title="evidence points both ways on an axis">${icon("alert", { size: 11 })} contradiction</span>` : ""}
               <div class="small dim">joint ${Math.round(r.comb.joint * 100)}% \xB7 fuzziest axis: ${ax} (${Math.round(r.comb.axes[ax].pLetter * 100)}%) \u2014 ${esc(AXIS_INFO[ax].q)}</div></div>
             <a class="btn small ghost" href="#/interview">get questions</a>
           </div>`;
@@ -3551,11 +3694,14 @@ svg text { font-family: var(--mono); }
       </div>
       <div>
         ${panel("Network distribution", typed.length ? typeGridHTML(distPosterior, top) + `<div class="small dim" style="margin-top:8px">${typed.length} typed of ${counts.people}. Full breakdown in <a href="#/patterns">Network patterns</a>.</div>` : `<div class="empty">Nobody typed yet.</div>`)}
-        ${panel("Recent activity", recent.length ? recent.map((it) => `
-          <div class="small" style="margin:6px 0">
-            <span class="dim mono">${esc(fmtDate(it.date))}</span> \xB7 <a href="#/person/${it.p.id}">${esc(it.p.name)}</a> \xB7
-            <span class="muted">${it.kind === "test" ? esc(it.text) : esc(it.text.slice(0, 90)) + (it.text.length > 90 ? "\u2026" : "")}</span>
-          </div>`).join("") : `<div class="empty">Quiet desk.</div>`)}
+        ${panel("Recent activity", recent.length ? recent.map((it) => {
+      const k = it.kind === "test" ? "test" : it.kind === "quote" ? "quote" : "ev";
+      const ic = it.kind === "test" ? "pulse" : it.kind === "quote" ? "quote" : "doc";
+      return `<div class="act-row small">
+            <span class="act-ic k-${k}">${icon(ic, { size: 13 })}</span>
+            <span><span class="dim mono">${esc(fmtDate(it.date))}</span> \xB7 <a href="#/person/${it.p.id}">${esc(it.p.name)}</a> \xB7 <span class="muted">${it.kind === "test" ? esc(it.text) : esc(it.text.slice(0, 90)) + (it.text.length > 90 ? "\u2026" : "")}</span></span>
+          </div>`;
+    }).join("") : `<div class="empty">Quiet desk.</div>`)}
       </div>
     </div>
     <div class="row">
