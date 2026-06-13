@@ -294,6 +294,7 @@ label.fld > span {
 }
 .qcat { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); margin-bottom: 10px; }
 .qtext { font-size: 19px; line-height: 1.45; margin-bottom: 20px; font-weight: 550; }
+.qnote { font-size: 13px; color: var(--mut); line-height: 1.4; margin: -12px 0 18px; padding-left: 11px; border-left: 2px solid var(--line2); }
 .opt {
   display: block; width: 100%; text-align: left;
   background: var(--panel2); border: 1px solid var(--line2); border-radius: 10px;
@@ -1006,33 +1007,33 @@ svg text { font-family: var(--mono); }
   };
   var QUICK = [
     // E/I
-    { id: "q01", fmt: "likert", axis: "EI", pole: "E", cat: "comm", text: "I often don't know exactly what I think until I've said it out loud." },
-    { id: "q02", fmt: "likert", axis: "EI", pole: "I", cat: "energy", text: "Two hours into a lively party with people I like, I'm more drained than lit up." },
-    { id: "q03", fmt: "likert", axis: "EI", pole: "E", cat: "bond", text: "Good news isn't fully real until I've told someone." },
-    { id: "q04", fmt: "likert", axis: "EI", pole: "I", cat: "comm", scale: "freq", text: "I have full conversations in my head that never happen out loud." },
-    { id: "q05", fmt: "ab", axis: "EI", cat: "energy", text: "A free Saturday night appears out of nowhere. The honest default:", a: { t: "Get people together", pole: "E" }, b: { t: "Glorious, glorious nothing", pole: "I" } },
-    { id: "q06", fmt: "ab", axis: "EI", cat: "social", text: "Which bothers you more?", a: { t: "A week with no plans with people", pole: "E" }, b: { t: "A week with something scheduled every night", pole: "I" } },
+    { id: "q01", fmt: "likert", axis: "EI", pole: "E", cat: "comm", note: "Think real or important conversations, not small talk.", text: "I often don't know exactly what I think until I've said it out loud.", alts: ["My opinions get sharper while I'm talking them through, not before.", "I work out what I actually believe by hearing myself say it."] },
+    { id: "q02", fmt: "likert", axis: "EI", pole: "I", cat: "energy", text: "Two hours into a lively party with people I like, I'm more drained than lit up.", alts: ["Even with people I love, a long social stretch leaves me needing to recharge alone."] },
+    { id: "q03", fmt: "likert", axis: "EI", pole: "E", cat: "bond", text: "Good news isn't fully real until I've told someone.", alts: ["When something great happens, my first move is to tell someone, not to sit with it."] },
+    { id: "q04", fmt: "likert", axis: "EI", pole: "I", cat: "comm", scale: "freq", text: "I have full conversations in my head that never happen out loud.", alts: ["I rehearse and replay conversations internally far more than I ever say them aloud."] },
+    { id: "q05", fmt: "ab", axis: "EI", cat: "energy", text: "A free Saturday night appears out of nowhere. The honest default:", a: { t: "Get people together", pole: "E" }, b: { t: "Glorious, glorious nothing", pole: "I" }, alts: [{ text: "An evening clears unexpectedly. Gut reaction:", a: "Who can I round up?", b: "Finally, no one to see" }] },
+    { id: "q06", fmt: "ab", axis: "EI", cat: "social", text: "Which bothers you more?", a: { t: "A week with no plans with people", pole: "E" }, b: { t: "A week with something scheduled every night", pole: "I" }, alts: [{ text: "The worse week:", a: "Seven evenings home alone", b: "Seven evenings out with people" }] },
     // S/N
-    { id: "q07", fmt: "likert", axis: "SN", pole: "S", cat: "mind", text: "When someone explains an idea, I want the concrete example first and the theory second." },
-    { id: "q08", fmt: "likert", axis: "SN", pole: "N", cat: "mind", text: "I care more about what a thing could become than what it currently is." },
-    { id: "q09", fmt: "likert", axis: "SN", pole: "S", cat: "mind", text: "I remember events in near-exact wording and detail, not just the gist." },
-    { id: "q10", fmt: "likert", axis: "SN", pole: "N", cat: "work", scale: "freq", text: "Mid-task, my attention drifts to connections that have nothing to do with the task." },
-    { id: "q11", fmt: "ab", axis: "SN", cat: "work", text: "The more annoying coworker:", a: { t: "Head in the clouds, allergic to specifics", pole: "S" }, b: { t: "Buried in details, can't zoom out", pole: "N" } },
-    { id: "q12", fmt: "ab", axis: "SN", cat: "comm", text: "Describing a film you loved, you lead with:", a: { t: "What happens in it", pole: "S" }, b: { t: "What it's really about", pole: "N" } },
+    { id: "q07", fmt: "likert", axis: "SN", pole: "S", cat: "mind", text: "When someone explains an idea, I want the concrete example first and the theory second.", alts: ["Give me a worked example before the abstract principle, or I lose the thread."] },
+    { id: "q08", fmt: "likert", axis: "SN", pole: "N", cat: "mind", text: "I care more about what a thing could become than what it currently is.", alts: ["I'm pulled toward potential and what-could-be more than the present facts."] },
+    { id: "q09", fmt: "likert", axis: "SN", pole: "S", cat: "mind", text: "I remember events in near-exact wording and detail, not just the gist.", alts: ["My memory keeps the specifics: who said what, what it looked like, the exact details."] },
+    { id: "q10", fmt: "likert", axis: "SN", pole: "N", cat: "work", scale: "freq", note: "Day to day, not when you're deliberately brainstorming.", text: "Mid-task, my attention drifts to connections that have nothing to do with the task.", alts: ["I'll be doing one thing and my mind leaps to tangents and patterns elsewhere."] },
+    { id: "q11", fmt: "ab", axis: "SN", cat: "work", text: "The more annoying coworker:", a: { t: "Head in the clouds, allergic to specifics", pole: "S" }, b: { t: "Buried in details, can't zoom out", pole: "N" }, alts: [{ text: "Harder to work with:", a: "All vision, never lands on the specifics", b: "All detail, never sees the point" }] },
+    { id: "q12", fmt: "ab", axis: "SN", cat: "comm", text: "Describing a film you loved, you lead with:", a: { t: "What happens in it", pole: "S" }, b: { t: "What it's really about", pole: "N" }, alts: [{ text: "Recommending a book, you start with:", a: "What happens in it", b: "What it's really getting at underneath" }] },
     // T/F
-    { id: "q13", fmt: "likert", axis: "TF", pole: "T", cat: "bond", text: "My first response to a friend's problem is to debug it, not to soothe it." },
-    { id: "q14", fmt: "likert", axis: "TF", pole: "T", cat: "comm", text: "I'd rather hear the blunt truth than a carefully managed version of it." },
-    { id: "q15", fmt: "likert", axis: "TF", pole: "F", cat: "decide", text: "Before judging whether a decision is correct, I feel how it will land on each person involved." },
-    { id: "q16", fmt: "likert", axis: "TF", pole: "F", cat: "comm", scale: "freq", text: "I soften a true statement because the blunt version would wound." },
-    { id: "q17", fmt: "ab", axis: "TF", cat: "conflict", text: "Which stings more?", a: { t: "\u201CYour logic was sloppy.\u201D", pole: "T" }, b: { t: "\u201CYou were unkind.\u201D", pole: "F" } },
-    { id: "q18", fmt: "ab", axis: "TF", cat: "decide", text: "You defend a tough call by pointing at:", a: { t: "The principle and the criteria", pole: "T" }, b: { t: "Who it protects", pole: "F" } },
+    { id: "q13", fmt: "likert", axis: "TF", pole: "T", cat: "bond", note: "Your honest first instinct, before you adjust to what they want.", text: "My first response to a friend's problem is to debug it, not to soothe it.", alts: ["When a friend brings a problem, I reach for solutions before comfort."] },
+    { id: "q14", fmt: "likert", axis: "TF", pole: "T", cat: "comm", text: "I'd rather hear the blunt truth than a carefully managed version of it.", alts: ["Give it to me straight; I trust bluntness over tactful packaging."] },
+    { id: "q15", fmt: "likert", axis: "TF", pole: "F", cat: "decide", text: "Before judging whether a decision is correct, I feel how it will land on each person involved.", alts: ["I can't call a decision right until I've weighed how it lands on each person."] },
+    { id: "q16", fmt: "likert", axis: "TF", pole: "F", cat: "comm", scale: "freq", text: "I soften a true statement because the blunt version would wound.", alts: ["I cushion a hard truth so it doesn't hurt more than it needs to."] },
+    { id: "q17", fmt: "ab", axis: "TF", cat: "conflict", text: "Which stings more?", a: { t: "\u201CYour logic was sloppy.\u201D", pole: "T" }, b: { t: "\u201CYou were unkind.\u201D", pole: "F" }, alts: [{ text: "The worse thing to be told:", a: "\u201CYour reasoning doesn't hold up.\u201D", b: "\u201CYou hurt someone.\u201D" }] },
+    { id: "q18", fmt: "ab", axis: "TF", cat: "decide", text: "You defend a tough call by pointing at:", a: { t: "The principle and the criteria", pole: "T" }, b: { t: "Who it protects", pole: "F" }, alts: [{ text: "Justifying a hard decision, you point to:", a: "The logic and the standard", b: "The people it looks after" }] },
     // J/P
-    { id: "q19", fmt: "likert", axis: "JP", pole: "J", cat: "plan", text: "Open loops nag at me; I close decisions early just to make them stop." },
-    { id: "q20", fmt: "likert", axis: "JP", pole: "P", cat: "work", text: "Deadlines are when my real work starts." },
-    { id: "q21", fmt: "likert", axis: "JP", pole: "J", cat: "plan", text: "Almost anything that takes over an hour gets a plan first, even a rough one." },
-    { id: "q22", fmt: "likert", axis: "JP", pole: "P", cat: "energy", text: "An unplanned day is a gift, not a problem to organize." },
-    { id: "q23", fmt: "ab", axis: "JP", cat: "plan", text: "Which bothers you more?", a: { t: "A plan that keeps changing", pole: "J" }, b: { t: "A plan that can't change", pole: "P" } },
-    { id: "q24", fmt: "ab", axis: "JP", cat: "plan", text: "Trip style:", a: { t: "The key things booked well ahead", pole: "J" }, b: { t: "Figure it out when we land", pole: "P" } }
+    { id: "q19", fmt: "likert", axis: "JP", pole: "J", cat: "plan", text: "Open loops nag at me; I close decisions early just to make them stop.", alts: ["Unresolved decisions itch at me until I settle them, sometimes too soon."] },
+    { id: "q20", fmt: "likert", axis: "JP", pole: "P", cat: "work", text: "Deadlines are when my real work starts.", alts: ["My best work happens in the final stretch before something is due."] },
+    { id: "q21", fmt: "likert", axis: "JP", pole: "J", cat: "plan", text: "Almost anything that takes over an hour gets a plan first, even a rough one.", alts: ["Before any sizable task I sketch a plan rather than just diving in."] },
+    { id: "q22", fmt: "likert", axis: "JP", pole: "P", cat: "energy", text: "An unplanned day is a gift, not a problem to organize.", alts: ["A wide-open day with nothing scheduled feels like freedom, not a void to fill."] },
+    { id: "q23", fmt: "ab", axis: "JP", cat: "plan", text: "Which bothers you more?", a: { t: "A plan that keeps changing", pole: "J" }, b: { t: "A plan that can't change", pole: "P" }, alts: [{ text: "The bigger frustration:", a: "Plans that won't hold still", b: "Plans with no room to move" }] },
+    { id: "q24", fmt: "ab", axis: "JP", cat: "plan", text: "Trip style:", a: { t: "The key things booked well ahead", pole: "J" }, b: { t: "Figure it out when we land", pole: "P" }, alts: [{ text: "Vacation approach:", a: "Big things locked in before we go", b: "Wing it once we're there" }] }
   ];
   var DEEP = [
     // ---- E/I: 8 likert (2 consistency-paired) + 4 forced choice
@@ -1187,6 +1188,36 @@ svg text { font-family: var(--mono); }
   ];
   function itemsFor(kind) {
     return kind === "deep" ? DEEP : QUICK;
+  }
+  function pickOne(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+  function shuffled(a) {
+    const x = a.slice();
+    for (let i = x.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [x[i], x[j]] = [x[j], x[i]];
+    }
+    return x;
+  }
+  function buildTest(kind) {
+    const items = itemsFor(kind).map((it) => {
+      const out = { id: it.id, fmt: it.fmt, axis: it.axis, pole: it.pole, cat: it.cat, scale: it.scale, con: it.con, note: it.note };
+      if (it.fmt === "ab") {
+        const v = pickOne([{ text: it.text, a: it.a.t, b: it.b.t }, ...it.alts || []]);
+        out.text = v.text;
+        out.a = { t: v.a, pole: it.a.pole };
+        out.b = { t: v.b, pole: it.b.pole };
+      } else if (it.fmt === "sjt") {
+        const v = pickOne([{ text: it.text, opts: it.opts.map((o) => o.t) }, ...it.alts || []]);
+        out.text = v.text;
+        out.opts = it.opts.map((o, i) => ({ t: v.opts && v.opts[i] || o.t, w: o.w }));
+      } else {
+        out.text = pickOne([it.text, ...it.alts || []]);
+      }
+      return out;
+    });
+    return shuffled(items);
   }
 
   // js/data_interview.js
@@ -2627,7 +2658,7 @@ svg text { font-family: var(--mono); }
     subject: { mode: "self", personId: "", label: "Self" },
     start(kind, subject) {
       this.kind = kind;
-      this.items = itemsFor(kind);
+      this.items = buildTest(kind);
       this.answers = {};
       this.idx = 0;
       this.subject = subject || { mode: "self", personId: "", label: "Self" };
@@ -2755,6 +2786,7 @@ svg text { font-family: var(--mono); }
     <div class="qcard">
       <div class="qcat">${esc(CAT_LABEL[item.cat] || item.cat)}${item.fmt === "sjt" ? " \xB7 situation" : ""}</div>
       <div class="qtext">${esc(item.text)}</div>
+      ${item.note ? `<div class="qnote">${esc(item.note)}</div>` : ""}
       ${body}
     </div>
     <div class="run-foot">
