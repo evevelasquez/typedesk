@@ -7,45 +7,46 @@
 <!-- Standalone build. Data stays in this browser's localStorage; nothing is sent anywhere. -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0c10'/%3E%3Ctext x='16' y='22' font-family='Menlo,monospace' font-size='16' fill='%23e0a64e' text-anchor='middle'%3ETD%3C/text%3E%3C/svg%3E">
 <style>
-/* TYPEDESK — private analyst desk. Dark, sharp, no externals. */
+/* TYPEDESK — private analyst desk. Dark, tactile, no externals. */
 
 :root {
-  --bg: #0a0c10;
-  --bg2: #0d1015;
-  --panel: #12161d;
-  --panel2: #171c25;
-  --panel3: #1d2330;
-  --line: #222a36;
-  --line2: #2e3848;
-  --text: #e9e7e2;
-  --mut: #9aa3b0;
-  --dim: #626c7b;
-  --amber: #e0a64e;
-  --amber-dim: #8a6a33;
-  --amber-ink: #1a1304;
-  --teal: #43b9a4;
-  --red: #d96363;
-  --green: #5fbf77;
-  --ax-ei: #6f9bdd;
-  --ax-sn: #43b9a4;
-  --ax-tf: #e0a64e;
-  --ax-jp: #a78bdb;
+  --bg: #11100d;
+  --bg2: #15130f;
+  --panel: #1d1a15;
+  --panel2: #242018;
+  --panel3: #2d281f;
+  --line: #3a3328;
+  --line2: #504635;
+  --text: #f0ece2;
+  --mut: #b1a896;
+  --dim: #7b725f;
+  --amber: #c9a46a;
+  --amber-dim: #7b633c;
+  --amber-ink: #19130a;
+  --teal: #8bb69c;
+  --red: #c36f5d;
+  --green: #8dbd78;
+  --ax-ei: #7f9fb6;
+  --ax-sn: #8bb69c;
+  --ax-tf: #c9a46a;
+  --ax-jp: #b08aa0;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --rad: 10px;
-  --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
-  --edge: inset 0 1px 0 rgba(255, 255, 255, 0.045);
+  --rad: 7px;
+  --shadow: 0 18px 45px rgba(0, 0, 0, 0.38);
+  --edge: inset 0 1px 0 rgba(255, 255, 255, 0.04);
   --lift: 0 16px 36px -22px rgba(0, 0, 0, 0.85);
-  --glow-amber: 0 0 22px rgba(224, 166, 78, 0.28);
+  --glow-amber: 0 0 18px rgba(201, 164, 106, 0.2);
 }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 body {
   background:
-    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.022) 1px, transparent 1.5px) 0 0 / 23px 23px,
-    radial-gradient(1100px 500px at 85% -10%, rgba(224, 166, 78, 0.06), transparent 60%),
-    radial-gradient(900px 600px at -10% 110%, rgba(111, 155, 221, 0.05), transparent 55%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px) 0 0 / 34px 34px,
+    linear-gradient(0deg, rgba(255, 255, 255, 0.014) 1px, transparent 1px) 0 0 / 34px 34px,
+    radial-gradient(900px 520px at 86% -12%, rgba(201, 164, 106, 0.08), transparent 62%),
+    radial-gradient(820px 560px at -15% 110%, rgba(139, 182, 156, 0.055), transparent 58%),
     var(--bg);
   color: var(--text);
   font-family: var(--sans);
@@ -64,7 +65,9 @@ a:hover { text-decoration: underline; }
 /* ---------- sidebar ---------- */
 #sidebar {
   border-right: 1px solid var(--line);
-  background: linear-gradient(180deg, var(--bg2), var(--bg) 70%);
+  background:
+    linear-gradient(180deg, rgba(36, 32, 24, 0.96), rgba(17, 16, 13, 0.98) 72%),
+    var(--bg);
   padding: 18px 14px 14px;
   position: sticky;
   top: 0;
@@ -75,12 +78,12 @@ a:hover { text-decoration: underline; }
 }
 .brand { display: flex; gap: 10px; align-items: center; margin: 2px 4px 18px; }
 .brand-mark {
-  width: 34px; height: 34px; border-radius: 8px;
+  width: 34px; height: 34px; border-radius: 6px;
   border: 1px solid var(--amber-dim);
   color: var(--amber);
   font-family: var(--mono); font-weight: 700; font-size: 13px;
   display: grid; place-items: center;
-  background: linear-gradient(160deg, rgba(224, 166, 78, 0.12), transparent);
+  background: linear-gradient(160deg, rgba(201, 164, 106, 0.16), rgba(139, 182, 156, 0.045));
   box-shadow: var(--glow-amber);
 }
 #sidebar h1 {
@@ -103,8 +106,8 @@ a:hover { text-decoration: underline; }
 #nav a:hover { color: var(--text); background: var(--panel); text-decoration: none; }
 #nav a.active {
   color: var(--amber);
-  background: linear-gradient(90deg, rgba(224, 166, 78, 0.12), transparent);
-  border-color: rgba(224, 166, 78, 0.25);
+  background: linear-gradient(90deg, rgba(201, 164, 106, 0.13), rgba(139, 182, 156, 0.035));
+  border-color: rgba(201, 164, 106, 0.28);
 }
 .side-foot { margin-top: auto; padding: 14px 8px 2px; }
 #storage-note { font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.04em; }
@@ -114,7 +117,7 @@ a:hover { text-decoration: underline; }
 #topbar {
   display: flex; align-items: center; gap: 12px;
   padding: 12px 22px; border-bottom: 1px solid var(--line);
-  background: rgba(10, 12, 16, 0.85); backdrop-filter: blur(6px);
+  background: rgba(17, 16, 13, 0.88); backdrop-filter: blur(6px);
   position: sticky; top: 0; z-index: 40;
 }
 #menu-btn { display: none; }
@@ -124,7 +127,7 @@ a:hover { text-decoration: underline; }
 
 /* ---------- generic ---------- */
 .panel {
-  background: linear-gradient(180deg, var(--panel2), var(--panel) 64%);
+  background: linear-gradient(180deg, var(--panel2), var(--panel) 68%);
   border: 1px solid var(--line);
   border-radius: var(--rad);
   padding: 16px 18px;
@@ -141,7 +144,7 @@ a:hover { text-decoration: underline; }
 .panel h3::before, .ptitle::before {
   content: ""; display: inline-block; width: 5px; height: 5px;
   border-radius: 1px; background: var(--amber); margin-right: 8px;
-  vertical-align: middle; box-shadow: 0 0 7px rgba(224, 166, 78, 0.6); opacity: 0.72;
+  vertical-align: middle; box-shadow: 0 0 7px rgba(201, 164, 106, 0.55); opacity: 0.72;
 }
 .panel h3 .hint { float: right; letter-spacing: 0; text-transform: none; color: var(--dim); font-weight: 400; }
 .panel h3 .hint::before { display: none; }
@@ -182,7 +185,7 @@ input[type="text"], input[type="date"], input[type="number"], textarea, select {
 textarea { resize: vertical; min-height: 70px; }
 input:focus, textarea:focus, select:focus, .btn:focus-visible {
   outline: none; border-color: var(--amber-dim);
-  box-shadow: 0 0 0 2px rgba(224, 166, 78, 0.15);
+  box-shadow: 0 0 0 2px rgba(201, 164, 106, 0.14);
 }
 label.fld { display: block; margin-bottom: 10px; }
 label.fld > span {
@@ -210,16 +213,16 @@ label.fld > span {
 .bigtype {
   font-family: var(--mono); font-size: 46px; font-weight: 700;
   letter-spacing: 0.14em; color: var(--amber);
-  text-shadow: 0 0 34px rgba(224, 166, 78, 0.25);
+  text-shadow: 0 0 30px rgba(201, 164, 106, 0.18);
   line-height: 1.1;
 }
 /* per-letter axis coloring for the four-letter hero code */
 .typeglyph { display: inline; }
 .typeglyph i { font-style: normal; }
-.typeglyph i.g-ei { color: var(--ax-ei); text-shadow: 0 0 26px rgba(111, 155, 221, 0.45); }
-.typeglyph i.g-sn { color: var(--ax-sn); text-shadow: 0 0 26px rgba(67, 185, 164, 0.45); }
-.typeglyph i.g-tf { color: var(--ax-tf); text-shadow: 0 0 26px rgba(224, 166, 78, 0.45); }
-.typeglyph i.g-jp { color: var(--ax-jp); text-shadow: 0 0 26px rgba(167, 139, 219, 0.45); }
+.typeglyph i.g-ei { color: var(--ax-ei); text-shadow: 0 0 22px rgba(127, 159, 182, 0.34); }
+.typeglyph i.g-sn { color: var(--ax-sn); text-shadow: 0 0 22px rgba(139, 182, 156, 0.34); }
+.typeglyph i.g-tf { color: var(--ax-tf); text-shadow: 0 0 22px rgba(201, 164, 106, 0.34); }
+.typeglyph i.g-jp { color: var(--ax-jp); text-shadow: 0 0 22px rgba(176, 138, 160, 0.34); }
 
 /* ---------- kpis ---------- */
 .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 16px; }
@@ -279,7 +282,7 @@ label.fld > span {
 .post-row { display: grid; grid-template-columns: 64px 1fr 52px; gap: 10px; align-items: center; margin: 6px 0; }
 .post-row .typecode { font-size: 13px; }
 .post-row .bar { height: 10px; border-radius: 5px; background: var(--bg2); border: 1px solid var(--line); overflow: hidden; }
-.post-row .bar > i { display: block; height: 100%; background: linear-gradient(90deg, var(--amber-dim), var(--amber)); box-shadow: 0 0 12px rgba(224, 166, 78, 0.35); }
+.post-row .bar > i { display: block; height: 100%; background: linear-gradient(90deg, var(--amber-dim), var(--amber)); box-shadow: 0 0 12px rgba(201, 164, 106, 0.28); }
 .post-row .pv { font-family: var(--mono); font-size: 12px; color: var(--mut); text-align: right; }
 
 /* ---------- test runner ---------- */
@@ -289,32 +292,65 @@ label.fld > span {
 .run-prog .meter > i { transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .run-count { font-family: var(--mono); font-size: 12px; color: var(--mut); white-space: nowrap; }
 .qcard {
-  background: linear-gradient(180deg, var(--panel2), var(--panel) 64%); border: 1px solid var(--line); border-radius: 14px;
-  padding: 26px 28px; box-shadow: var(--edge), var(--shadow);
+  background:
+    linear-gradient(180deg, rgba(45, 40, 31, 0.96), rgba(29, 26, 21, 0.98) 68%),
+    var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 26px 28px;
+  box-shadow: var(--edge), 0 22px 52px rgba(0, 0, 0, 0.34);
 }
-.qcat { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); margin-bottom: 10px; }
-.qtext { font-size: 19px; line-height: 1.45; margin-bottom: 20px; font-weight: 550; }
+.qcat {
+  display: inline-flex;
+  border: 1px solid rgba(201, 164, 106, 0.22);
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mut);
+  margin-bottom: 14px;
+  background: rgba(201, 164, 106, 0.045);
+}
+.qtext { font-size: 19px; line-height: 1.46; margin-bottom: 20px; font-weight: 560; color: #f5efe3; }
 .qnote { font-size: 13px; color: var(--mut); line-height: 1.4; margin: -12px 0 18px; padding-left: 11px; border-left: 2px solid var(--line2); }
 .opt {
   display: block; width: 100%; text-align: left;
-  background: var(--panel2); border: 1px solid var(--line2); border-radius: 10px;
+  background: rgba(21, 19, 15, 0.72); border: 1px solid var(--line2); border-radius: 8px;
   padding: 13px 15px; margin: 8px 0; font-size: 15px; line-height: 1.4;
-  transition: border-color 0.14s ease, background 0.14s ease, transform 0.1s ease;
+  transition: border-color 0.14s ease, background 0.14s ease, transform 0.1s ease, box-shadow 0.14s ease;
 }
-.opt:hover { border-color: var(--amber-dim); background: var(--panel3); transform: translateX(3px); }
-.opt.sel { border-color: var(--amber); background: rgba(224, 166, 78, 0.1); }
+.opt:hover { border-color: var(--amber-dim); background: rgba(45, 40, 31, 0.9); transform: translateX(2px); }
+.opt.sel {
+  border-color: var(--amber);
+  background: rgba(201, 164, 106, 0.11);
+  box-shadow: inset 3px 0 0 var(--amber);
+}
 .opt .ok { font-family: var(--mono); color: var(--amber); margin-right: 8px; font-weight: 700; }
 .likert { display: grid; grid-template-columns: repeat(5, 1fr); gap: 7px; margin-top: 4px; }
 .likert button {
-  background: var(--panel2); border: 1px solid var(--line2); border-radius: 9px;
+  background: rgba(21, 19, 15, 0.72); border: 1px solid var(--line2); border-radius: 8px;
   padding: 11px 4px; font-size: 11.5px; line-height: 1.25; color: var(--mut);
-  transition: border-color 0.14s ease, color 0.14s ease, background 0.14s ease, transform 0.1s ease;
+  min-height: 76px;
+  transition: border-color 0.14s ease, color 0.14s ease, background 0.14s ease, transform 0.1s ease, box-shadow 0.14s ease;
 }
 .likert button:hover { border-color: var(--amber-dim); color: var(--text); transform: translateY(-2px); }
-.likert button.sel { border-color: var(--amber); color: var(--amber); background: rgba(224, 166, 78, 0.1); }
+.likert button.sel {
+  border-color: var(--amber);
+  color: var(--amber);
+  background: rgba(201, 164, 106, 0.11);
+  box-shadow: inset 0 3px 0 var(--amber);
+}
 .likert button b { display: block; font-family: var(--mono); font-size: 15px; margin-bottom: 3px; color: var(--text); }
 .likert button.sel b { color: var(--amber); }
-.scale-track { height: 3px; border-radius: 3px; margin: 2px 6px 12px; background: linear-gradient(90deg, var(--ax-ei), var(--line2) 50%, var(--amber)); opacity: 0.45; }
+.scale-track {
+  height: 3px;
+  border-radius: 3px;
+  margin: 2px 6px 12px;
+  background: linear-gradient(90deg, var(--dim), var(--line2) 50%, var(--amber));
+  opacity: 0.55;
+}
 .lk-lab { display: block; }
 .duel { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: stretch; margin-top: 4px; }
 .duel-or { align-self: center; font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim); }
@@ -1002,38 +1038,38 @@ svg text { font-family: var(--mono); }
     deep: { key: "deep", title: "Deep test", minutes: 10, blurb: "56 items: situations, trade-offs, stress behavior, consistency traps." }
   };
   var SCALES = {
-    agree: ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"],
-    freq: ["Never", "Rarely", "Sometimes", "Often", "Always"]
+    agree: ["Very unlike me", "Somewhat unlike me", "Mixed or depends", "Somewhat like me", "Very like me"],
+    freq: ["Almost never", "Rarely", "Sometimes", "Often", "Almost always"]
   };
   var QUICK = [
     // E/I
-    { id: "q01", fmt: "likert", axis: "EI", pole: "E", cat: "comm", note: "Think real or important conversations, not small talk.", text: "I often don't know exactly what I think until I've said it out loud.", alts: ["My opinions get sharper while I'm talking them through, not before.", "I work out what I actually believe by hearing myself say it."] },
-    { id: "q02", fmt: "likert", axis: "EI", pole: "I", cat: "energy", text: "Two hours into a lively party with people I like, I'm more drained than lit up.", alts: ["Even with people I love, a long social stretch leaves me needing to recharge alone."] },
-    { id: "q03", fmt: "likert", axis: "EI", pole: "E", cat: "bond", text: "Good news isn't fully real until I've told someone.", alts: ["When something great happens, my first move is to tell someone, not to sit with it."] },
-    { id: "q04", fmt: "likert", axis: "EI", pole: "I", cat: "comm", scale: "freq", text: "I have full conversations in my head that never happen out loud.", alts: ["I rehearse and replay conversations internally far more than I ever say them aloud."] },
-    { id: "q05", fmt: "ab", axis: "EI", cat: "energy", text: "A free Saturday night appears out of nowhere. The honest default:", a: { t: "Get people together", pole: "E" }, b: { t: "Glorious, glorious nothing", pole: "I" }, alts: [{ text: "An evening clears unexpectedly. Gut reaction:", a: "Who can I round up?", b: "Finally, no one to see" }] },
-    { id: "q06", fmt: "ab", axis: "EI", cat: "social", text: "Which bothers you more?", a: { t: "A week with no plans with people", pole: "E" }, b: { t: "A week with something scheduled every night", pole: "I" }, alts: [{ text: "The worse week:", a: "Seven evenings home alone", b: "Seven evenings out with people" }] },
+    { id: "q01", fmt: "likert", axis: "EI", pole: "E", cat: "comm", note: "Think about ordinary decision-making, not public speaking skill.", text: "Talking an idea through helps me discover what I actually think.", alts: ["I usually understand my own view better after discussing it with someone."] },
+    { id: "q02", fmt: "likert", axis: "EI", pole: "I", cat: "energy", text: "After a lot of social time, I need quiet time before I feel like myself again.", alts: ["Even enjoyable social time leaves me needing time alone to recharge."] },
+    { id: "q03", fmt: "likert", axis: "EI", pole: "E", cat: "bond", text: "When something important happens, I want to share it with someone soon.", alts: ["Good or difficult news feels easier to process once I have told someone."] },
+    { id: "q04", fmt: "likert", axis: "EI", pole: "I", cat: "comm", scale: "freq", text: "I think through conversations privately before I decide what to say.", alts: ["I often rehearse what I mean before saying it out loud."] },
+    { id: "q05", fmt: "ab", axis: "EI", cat: "energy", text: "After a full week, which sounds more restorative?", a: { t: "Seeing people and getting re-energized by conversation", pole: "E" }, b: { t: "Having quiet time with very little social demand", pole: "I" }, alts: [{ text: "When you are tired, you are more likely to recover by:", a: "Being around people you like", b: "Being alone or with one very familiar person" }] },
+    { id: "q06", fmt: "ab", axis: "EI", cat: "social", text: "Which situation is harder for you?", a: { t: "Too many days with no meaningful conversation", pole: "E" }, b: { t: "Too many days with social plans and little privacy", pole: "I" }, alts: [{ text: "Which would wear on you faster?", a: "A quiet week with almost no social contact", b: "A packed week with people every evening" }] },
     // S/N
-    { id: "q07", fmt: "likert", axis: "SN", pole: "S", cat: "mind", text: "When someone explains an idea, I want the concrete example first and the theory second.", alts: ["Give me a worked example before the abstract principle, or I lose the thread."] },
-    { id: "q08", fmt: "likert", axis: "SN", pole: "N", cat: "mind", text: "I care more about what a thing could become than what it currently is.", alts: ["I'm pulled toward potential and what-could-be more than the present facts."] },
-    { id: "q09", fmt: "likert", axis: "SN", pole: "S", cat: "mind", text: "I remember events in near-exact wording and detail, not just the gist.", alts: ["My memory keeps the specifics: who said what, what it looked like, the exact details."] },
-    { id: "q10", fmt: "likert", axis: "SN", pole: "N", cat: "work", scale: "freq", note: "Day to day, not when you're deliberately brainstorming.", text: "Mid-task, my attention drifts to connections that have nothing to do with the task.", alts: ["I'll be doing one thing and my mind leaps to tangents and patterns elsewhere."] },
-    { id: "q11", fmt: "ab", axis: "SN", cat: "work", text: "The more annoying coworker:", a: { t: "Head in the clouds, allergic to specifics", pole: "S" }, b: { t: "Buried in details, can't zoom out", pole: "N" }, alts: [{ text: "Harder to work with:", a: "All vision, never lands on the specifics", b: "All detail, never sees the point" }] },
-    { id: "q12", fmt: "ab", axis: "SN", cat: "comm", text: "Describing a film you loved, you lead with:", a: { t: "What happens in it", pole: "S" }, b: { t: "What it's really about", pole: "N" }, alts: [{ text: "Recommending a book, you start with:", a: "What happens in it", b: "What it's really getting at underneath" }] },
+    { id: "q07", fmt: "likert", axis: "SN", pole: "S", cat: "mind", text: "I understand new ideas best when I can connect them to concrete examples.", alts: ["I prefer explanations that start with real examples before moving to theory."] },
+    { id: "q08", fmt: "likert", axis: "SN", pole: "N", cat: "mind", text: "I am naturally drawn to possibilities, patterns and what something could become.", alts: ["I tend to notice the larger pattern before the practical details."] },
+    { id: "q09", fmt: "likert", axis: "SN", pole: "S", cat: "mind", text: "I remember specific details from experiences: exact words, places or sequences.", alts: ["When I describe something that happened, I usually keep close to the actual details."] },
+    { id: "q10", fmt: "likert", axis: "SN", pole: "N", cat: "work", scale: "freq", note: "Answer for ordinary tasks, not deliberate brainstorming sessions.", text: "While doing one thing, my mind jumps to related ideas or future possibilities.", alts: ["My attention often moves from the present task to patterns or implications around it."] },
+    { id: "q11", fmt: "ab", axis: "SN", cat: "work", text: "Which work style frustrates you more?", a: { t: "Ideas that never become specific enough to act on", pole: "S" }, b: { t: "Details handled carefully without asking what they mean", pole: "N" }, alts: [{ text: "Which is harder for you to tolerate?", a: "Big vision with no practical next step", b: "Accurate details with no larger point" }] },
+    { id: "q12", fmt: "ab", axis: "SN", cat: "comm", text: "When explaining something you liked, you usually start with:", a: { t: "What happened and what stood out", pole: "S" }, b: { t: "The idea, theme or pattern behind it", pole: "N" }, alts: [{ text: "When recommending a book or film, you lead with:", a: "The plot, scenes or concrete details", b: "What it is really about underneath" }] },
     // T/F
-    { id: "q13", fmt: "likert", axis: "TF", pole: "T", cat: "bond", note: "Your honest first instinct, before you adjust to what they want.", text: "My first response to a friend's problem is to debug it, not to soothe it.", alts: ["When a friend brings a problem, I reach for solutions before comfort."] },
-    { id: "q14", fmt: "likert", axis: "TF", pole: "T", cat: "comm", text: "I'd rather hear the blunt truth than a carefully managed version of it.", alts: ["Give it to me straight; I trust bluntness over tactful packaging."] },
-    { id: "q15", fmt: "likert", axis: "TF", pole: "F", cat: "decide", text: "Before judging whether a decision is correct, I feel how it will land on each person involved.", alts: ["I can't call a decision right until I've weighed how it lands on each person."] },
-    { id: "q16", fmt: "likert", axis: "TF", pole: "F", cat: "comm", scale: "freq", text: "I soften a true statement because the blunt version would wound.", alts: ["I cushion a hard truth so it doesn't hurt more than it needs to."] },
-    { id: "q17", fmt: "ab", axis: "TF", cat: "conflict", text: "Which stings more?", a: { t: "\u201CYour logic was sloppy.\u201D", pole: "T" }, b: { t: "\u201CYou were unkind.\u201D", pole: "F" }, alts: [{ text: "The worse thing to be told:", a: "\u201CYour reasoning doesn't hold up.\u201D", b: "\u201CYou hurt someone.\u201D" }] },
-    { id: "q18", fmt: "ab", axis: "TF", cat: "decide", text: "You defend a tough call by pointing at:", a: { t: "The principle and the criteria", pole: "T" }, b: { t: "Who it protects", pole: "F" }, alts: [{ text: "Justifying a hard decision, you point to:", a: "The logic and the standard", b: "The people it looks after" }] },
+    { id: "q13", fmt: "likert", axis: "TF", pole: "T", cat: "bond", note: "Answer for your first instinct, before you adjust to the person.", text: "When someone brings me a problem, I first look for the clearest solution.", alts: ["My first response to a problem is to understand what is true and what would work."] },
+    { id: "q14", fmt: "likert", axis: "TF", pole: "T", cat: "comm", text: "I would rather receive direct criticism than a softened version that hides the point.", alts: ["Clear, accurate feedback matters more to me than gentle delivery."] },
+    { id: "q15", fmt: "likert", axis: "TF", pole: "F", cat: "decide", text: "When deciding, I pay close attention to how each person will be affected.", alts: ["A decision feels unfinished until I have considered the people involved."] },
+    { id: "q16", fmt: "likert", axis: "TF", pole: "F", cat: "comm", scale: "freq", text: "I adjust my wording so the truth is easier for someone to receive.", alts: ["I often think about how a true statement will feel before I say it."] },
+    { id: "q17", fmt: "ab", axis: "TF", cat: "conflict", text: "Which criticism would bother you more?", a: { t: "Your reasoning was weak.", pole: "T" }, b: { t: "You were inconsiderate.", pole: "F" }, alts: [{ text: "Which feedback lands harder?", a: "You missed the logic.", b: "You hurt someone." }] },
+    { id: "q18", fmt: "ab", axis: "TF", cat: "decide", text: "When defending a hard decision, you are more likely to emphasize:", a: { t: "The standard, evidence and consistency", pole: "T" }, b: { t: "The people affected and what is humane", pole: "F" }, alts: [{ text: "A hard choice feels more justified when it is grounded in:", a: "Clear criteria", b: "Care for the people involved" }] },
     // J/P
-    { id: "q19", fmt: "likert", axis: "JP", pole: "J", cat: "plan", text: "Open loops nag at me; I close decisions early just to make them stop.", alts: ["Unresolved decisions itch at me until I settle them, sometimes too soon."] },
-    { id: "q20", fmt: "likert", axis: "JP", pole: "P", cat: "work", text: "Deadlines are when my real work starts.", alts: ["My best work happens in the final stretch before something is due."] },
-    { id: "q21", fmt: "likert", axis: "JP", pole: "J", cat: "plan", text: "Almost anything that takes over an hour gets a plan first, even a rough one.", alts: ["Before any sizable task I sketch a plan rather than just diving in."] },
-    { id: "q22", fmt: "likert", axis: "JP", pole: "P", cat: "energy", text: "An unplanned day is a gift, not a problem to organize.", alts: ["A wide-open day with nothing scheduled feels like freedom, not a void to fill."] },
-    { id: "q23", fmt: "ab", axis: "JP", cat: "plan", text: "Which bothers you more?", a: { t: "A plan that keeps changing", pole: "J" }, b: { t: "A plan that can't change", pole: "P" }, alts: [{ text: "The bigger frustration:", a: "Plans that won't hold still", b: "Plans with no room to move" }] },
-    { id: "q24", fmt: "ab", axis: "JP", cat: "plan", text: "Trip style:", a: { t: "The key things booked well ahead", pole: "J" }, b: { t: "Figure it out when we land", pole: "P" }, alts: [{ text: "Vacation approach:", a: "Big things locked in before we go", b: "Wing it once we're there" }] }
+    { id: "q19", fmt: "likert", axis: "JP", pole: "J", cat: "plan", text: "I feel better once decisions are made and next steps are clear.", alts: ["Unfinished decisions take up mental space until I settle them."] },
+    { id: "q20", fmt: "likert", axis: "JP", pole: "P", cat: "work", text: "I often do good work by staying flexible until the deadline gets close.", alts: ["I prefer to leave room for new information before locking in my approach."] },
+    { id: "q21", fmt: "likert", axis: "JP", pole: "J", cat: "plan", text: "For anything important, I usually want a plan before I begin.", alts: ["I like to know the order of operations before I start a substantial task."] },
+    { id: "q22", fmt: "likert", axis: "JP", pole: "P", cat: "energy", text: "A day with no fixed plan feels open and energizing to me.", alts: ["I enjoy leaving space in the day to see what unfolds."] },
+    { id: "q23", fmt: "ab", axis: "JP", cat: "plan", text: "Which is more frustrating?", a: { t: "A plan that keeps changing after you have organized around it", pole: "J" }, b: { t: "A plan with no room to adjust when something better appears", pole: "P" }, alts: [{ text: "Which bothers you more?", a: "Not being able to rely on the plan", b: "Not being able to change the plan" }] },
+    { id: "q24", fmt: "ab", axis: "JP", cat: "plan", text: "For travel, you would rather:", a: { t: "Book the key details ahead of time", pole: "J" }, b: { t: "Keep the schedule loose and decide as you go", pole: "P" }, alts: [{ text: "Your preferred trip style:", a: "Important pieces settled in advance", b: "Flexible enough to adapt each day" }] }
   ];
   var DEEP = [
     // ---- E/I: 8 likert (2 consistency-paired) + 4 forced choice
